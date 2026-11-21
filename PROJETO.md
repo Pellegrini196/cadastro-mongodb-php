@@ -30,7 +30,7 @@ As telas juntam as coleções com `aggregate` e `$lookup`. Índices únicos em C
 
 - Pasta no PC: `D:\ClaudeCode\cadastro-mongodb-php`.
 - Ambiente neste PC (instalado em 21/11/2026 pelo winget): PHP 8.3 NTS em `%LOCALAPPDATA%\Microsoft\WinGet\Packages\PHP.PHP.NTS.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe` (com `php.ini`, a DLL da extensão `mongodb` e o `composer.phar` com `composer.bat`) e o serviço do Windows `MongoDB` (porta 27017, sem usuário e senha, só acessível de `localhost`).
-- Repositório GitHub: ainda não criado.
+- Repositório GitHub (público, criado em 21/11/2026): https://github.com/Pellegrini196/cadastro-mongodb-php
 
 ## 5. Como rodar, testar e publicar
 
@@ -53,7 +53,7 @@ Ainda não testado: MongoDB Atlas (só o local) e `docker compose up -d`.
 
 ## 7. Próximos passos
 
-1. Criar o repositório no GitHub (commit e push só quando o Murilo pedir) e enviar o link no Classroom. O trabalho é individual (definido em 21/11/2026), e o README já traz só o nome dele.
+1. Enviar o link do repositório no Classroom (commit e push só quando o Murilo pedir). O trabalho é individual (definido em 21/11/2026), e o README já traz só o nome dele.
 2. Opcional: testar com um cluster do Atlas, se o professor exigir banco na nuvem.
 
 ## 8. Decisões e motivos
