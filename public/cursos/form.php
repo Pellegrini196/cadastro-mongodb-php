@@ -67,7 +67,7 @@ require __DIR__ . '/../../templates/header.php';
         </div>
     </div>
     <div class="d-flex gap-2 mt-4">
-        <button class="btn btn-success"><i class="bi bi-check-lg"></i> Salvar</button>
+        <button class="btn btn-principal">Salvar curso</button>
         <a href="<?= url($editando ? 'cursos/ver.php?id=' . $id : 'cursos/index.php') ?>" class="btn btn-outline-secondary">Cancelar</a>
     </div>
 </form>

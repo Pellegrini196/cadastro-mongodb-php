@@ -35,27 +35,27 @@ require __DIR__ . '/../../templates/header.php';
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="form-label" for="ra">RA (registro acadêmico)</label>
-                <input class="form-control" id="ra" <?= inv('ra') ?> name="ra" required maxlength="20" value="<?= h($v('ra')) ?>">
+                <input class="form-control" id="ra" <?= inv('ra') ?> autocomplete="off" name="ra" required maxlength="20" value="<?= h($v('ra')) ?>">
             </div>
             <div class="col-md-9">
                 <label class="form-label" for="nome">Nome completo</label>
-                <input class="form-control" id="nome" <?= inv('nome') ?> name="nome" required maxlength="120" value="<?= h($v('nome')) ?>">
+                <input class="form-control" id="nome" <?= inv('nome') ?> autocomplete="off" name="nome" required maxlength="120" value="<?= h($v('nome')) ?>">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="cpf">CPF</label>
-                <input class="form-control" id="cpf" <?= inv('cpf') ?> name="cpf" inputmode="numeric" required placeholder="000.000.000-00" value="<?= h($v('cpf') ? formatarCpf($v('cpf')) : '') ?>">
+                <input class="form-control" id="cpf" <?= inv('cpf') ?> autocomplete="off" name="cpf" inputmode="numeric" required placeholder="000.000.000-00" value="<?= h($v('cpf') ? formatarCpf($v('cpf')) : '') ?>">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="data_nascimento">Data de nascimento</label>
-                <input type="date" class="form-control" id="data_nascimento" <?= inv('data_nascimento') ?> name="data_nascimento" required value="<?= h($v('data_nascimento')) ?>">
+                <input type="date" class="form-control" id="data_nascimento" <?= inv('data_nascimento') ?> autocomplete="off" name="data_nascimento" required value="<?= h($v('data_nascimento')) ?>">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="telefone">Telefone</label>
-                <input class="form-control" id="telefone" <?= inv('telefone') ?> name="telefone" type="tel" required placeholder="(11) 99999-9999" value="<?= h($v('telefone')) ?>">
+                <input class="form-control" id="telefone" <?= inv('telefone') ?> autocomplete="off" name="telefone" type="tel" required placeholder="(11) 99999-9999" value="<?= h($v('telefone')) ?>">
             </div>
             <div class="col-md-12">
                 <label class="form-label" for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" <?= inv('email') ?> name="email" required value="<?= h($v('email')) ?>">
+                <input type="email" class="form-control" id="email" <?= inv('email') ?> autocomplete="off" name="email" required value="<?= h($v('email')) ?>">
             </div>
         </div>
     </fieldset>
@@ -65,32 +65,32 @@ require __DIR__ . '/../../templates/header.php';
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="form-label" for="cep">CEP</label>
-                <input class="form-control" id="cep" <?= inv('cep') ?> name="endereco[cep]" inputmode="numeric" required placeholder="00000-000" value="<?= h($end('cep')) ?>">
+                <input class="form-control" id="cep" <?= inv('cep') ?> autocomplete="off" name="endereco[cep]" inputmode="numeric" required placeholder="00000-000" value="<?= h($end('cep')) ?>">
                 <div class="form-text" id="cep-status" role="status"></div>
             </div>
             <div class="col-md-7">
                 <label class="form-label" for="logradouro">Logradouro</label>
-                <input class="form-control" id="logradouro" <?= inv('logradouro') ?> name="endereco[logradouro]" required value="<?= h($end('logradouro')) ?>">
+                <input class="form-control" id="logradouro" <?= inv('logradouro') ?> autocomplete="off" name="endereco[logradouro]" required value="<?= h($end('logradouro')) ?>">
             </div>
             <div class="col-md-2">
                 <label class="form-label" for="numero">Número</label>
-                <input class="form-control" id="numero" <?= inv('numero') ?> name="endereco[numero]" required value="<?= h($end('numero')) ?>">
+                <input class="form-control" id="numero" <?= inv('numero') ?> autocomplete="off" name="endereco[numero]" required value="<?= h($end('numero')) ?>">
             </div>
             <div class="col-md-4">
-                <label class="form-label" for="complemento">Complemento</label>
-                <input class="form-control" id="complemento" <?= inv('complemento') ?> name="endereco[complemento]" value="<?= h($end('complemento')) ?>">
+                <label class="form-label" for="complemento">Complemento <span class="text-body-secondary fw-normal">(opcional)</span></label>
+                <input class="form-control" id="complemento" <?= inv('complemento') ?> autocomplete="off" name="endereco[complemento]" value="<?= h($end('complemento')) ?>">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="bairro">Bairro</label>
-                <input class="form-control" id="bairro" <?= inv('bairro') ?> name="endereco[bairro]" required value="<?= h($end('bairro')) ?>">
+                <input class="form-control" id="bairro" <?= inv('bairro') ?> autocomplete="off" name="endereco[bairro]" required value="<?= h($end('bairro')) ?>">
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="cidade">Cidade</label>
-                <input class="form-control" id="cidade" <?= inv('cidade') ?> name="endereco[cidade]" required value="<?= h($end('cidade')) ?>">
+                <input class="form-control" id="cidade" <?= inv('cidade') ?> autocomplete="off" name="endereco[cidade]" required value="<?= h($end('cidade')) ?>">
             </div>
             <div class="col-md-2">
                 <label class="form-label" for="uf">UF</label>
-                <select class="form-select" id="uf" <?= inv('uf') ?> name="endereco[uf]" required>
+                <select class="form-select" id="uf" <?= inv('uf') ?> autocomplete="off" name="endereco[uf]" required>
                     <option value="">--</option>
                     <?php foreach (UFS as $uf): ?>
                         <option <?= $end('uf') === $uf ? 'selected' : '' ?>><?= $uf ?></option>
@@ -101,7 +101,7 @@ require __DIR__ . '/../../templates/header.php';
     </fieldset>
 
     <div class="d-flex gap-2">
-        <button class="btn btn-success"><i class="bi bi-check-lg"></i> Salvar</button>
+        <button class="btn btn-principal">Salvar estudante</button>
         <a href="<?= url($editando ? 'estudantes/ver.php?id=' . $id : 'estudantes/index.php') ?>" class="btn btn-outline-secondary">Cancelar</a>
     </div>
 </form>
@@ -110,6 +110,26 @@ require __DIR__ . '/../../templates/header.php';
 // Busca o endereço pelo CEP na API pública ViaCEP
 $scripts = <<<'JS'
 <script>
+// Máscaras: o servidor aceita com ou sem pontuação, aqui só facilita a leitura
+const aplicar = (valor, molde) => {
+    const d = valor.replace(/\D/g, '');
+    let i = 0, saida = '';
+    for (const c of molde) {
+        if (i >= d.length) break;
+        saida += c === '#' ? d[i++] : c;
+    }
+    return saida;
+};
+const mascaras = {
+    cpf: v => aplicar(v, '###.###.###-##'),
+    cep: v => aplicar(v, '#####-###'),
+    telefone: v => aplicar(v, v.replace(/\D/g, '').length > 10 ? '(##) #####-####' : '(##) ####-####'),
+};
+for (const [id, formatar] of Object.entries(mascaras)) {
+    const campo = document.getElementById(id);
+    campo.addEventListener('input', () => { campo.value = formatar(campo.value); });
+    campo.value = formatar(campo.value);
+}
 document.getElementById('cep').addEventListener('blur', async (ev) => {
     const cep = ev.target.value.replace(/\D/g, '');
     const status = document.getElementById('cep-status');

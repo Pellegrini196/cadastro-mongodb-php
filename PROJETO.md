@@ -23,7 +23,8 @@ As telas juntam as coleções com `aggregate` e `$lookup`. Índices únicos em C
 - PHP 8.3.37 (o projeto exige 8.1 ou mais) e extensão `mongodb` 1.21.14
 - Biblioteca `mongodb/mongodb` (Composer; o `composer.json` aceita ^1.15 ou ^2.0, instalada a 1.21.6) e Composer 2.11.2
 - MongoDB 7.0.28 local (mesma versão do `docker-compose.yml`); o Atlas também funciona
-- Bootstrap 5.3.3 e Bootstrap Icons 1.11.3 por CDN
+- Bootstrap 5.3.3 e Bootstrap Icons 1.11.3 por CDN, lendo os tokens de `public/assets/app.css`
+- Fontes Sora (títulos) e Source Sans 3 (corpo) pelo Google Fonts; identidade completa em `DESIGN.md`
 - ViaCEP (consulta de CEP no navegador)
 
 ## 4. Onde está
@@ -41,7 +42,7 @@ php scripts/seed.php        # dados de exemplo (opcional)
 php -S localhost:8000 -t public
 ```
 
-Testes: não há testes automatizados no repositório. Em 21/11/2026 rodei um roteiro de ponta a ponta (44 verificações) que fala HTTP com o servidor `php -S` e confere o MongoDB: validação, cadastro, edição, CPF, e-mail, RA e código duplicados, matrícula repetida, curso lotado, troca de status, reativação sem vaga, exclusão com e sem confirmação e exclusão em cascata. Passou tudo. O roteiro não ficou no repositório. Também conferida a sintaxe de todos os arquivos (`php -l`).
+Testes: não há testes automatizados no repositório. Em 21/11/2026 rodei um roteiro de ponta a ponta (44 verificações) que fala HTTP com o servidor `php -S` e confere o MongoDB: validação, cadastro, edição, CPF, e-mail, RA e código duplicados, matrícula repetida, curso lotado, troca de status, reativação sem vaga, exclusão com e sem confirmação e exclusão em cascata. Passou tudo. O roteiro não ficou no repositório. Também conferida a sintaxe de todos os arquivos (`php -l`). O detector de design (`impeccable detect` contra o servidor rodando, página por página, porque em `.php` ele só lê o texto) deu 0 achados nas 7 telas; a medição de área de clique (230 alvos) e de estouro de largura em 320, 1100 e 1200 px também está limpa.
 
 Publicar: subir o código para um repositório GitHub e colar o link na atividade do Classroom. Commit e push só quando o Murilo pedir.
 
@@ -49,12 +50,15 @@ Publicar: subir o código para um repositório GitHub e colar o link na atividad
 
 Funcionando no PC contra um MongoDB 7 local, com o roteiro de ponta a ponta passando. Painel, listas, detalhes, gravação, índices únicos e `$lookup` testados em dados reais. Interface revisada em 20/11/2026 com better-interface e, em 21/11/2026, com os três itens que ficaram abertos resolvidos (veja a seção 8). Layout conferido em 320, 1100 e 1200 px: nenhuma página estoura a largura; em 320 px as tabelas rolam por dentro, com sombra indicando o lado com mais conteúdo.
 
+Identidade visual aplicada em 21/11/2026 (`DESIGN.md`): paleta análoga petróleo e verde-azulado, Sora e Source Sans 3, régua de vagas como assinatura, sem semáforo. Formulário de estudante com máscara de CPF, telefone e CEP, "(opcional)" no complemento, botão que bloqueia clique duplo e estados vazios com ação.
+
 Ainda não testado: MongoDB Atlas (só o local) e `docker compose up -d`.
 
 ## 7. Próximos passos
 
 1. Enviar o link do repositório no Classroom (commit e push só quando o Murilo pedir). O trabalho é individual (definido em 21/11/2026), e o README já traz só o nome dele.
 2. Opcional: testar com um cluster do Atlas, se o professor exigir banco na nuvem.
+3. Itens das listas Formulários e Tabelas do Notion que ainda não foram feitos: paginação com total ("1 a 50 de N"), ordenação clicando no cabeçalho, cabeçalho fixo ao rolar, ações por linha mais discretas, validação ao sair do campo, aviso ao sair com alterações não salvas, estado de carregamento nas listas. Não impedem o uso; entram se o professor pedir ou o Murilo quiser.
 
 ## 8. Decisões e motivos
 
@@ -65,6 +69,12 @@ Ainda não testado: MongoDB Atlas (só o local) e `docker compose up -d`.
 - O status só muda ao clicar em "Salvar status". Motivo: enviar o formulário ao mudar a opção quebra a navegação por teclado (WCAG 3.2.2).
 - Erros de formulário apontam para o campo: cada aviso do topo é um link para o campo, o campo ganha `aria-invalid="true"` e borda vermelha, e o foco vai para o primeiro. Motivo: leitor de tela e teclado precisam saber qual campo corrigir (`erroDeFormulario` e `inv` em `src/helpers.php`).
 - Exclusão sem JavaScript abre uma página de confirmação (`exigirConfirmacao` em `src/helpers.php`); com JavaScript, o navegador pergunta e envia `confirmado=1`. Motivo: sem JavaScript a exclusão era imediata, sem pergunta.
+- Identidade A, "Institucional e calma" (`DESIGN.md`): tokens por função, Sora e Source Sans 3, assinatura na régua de vagas. Motivo: regra de Cores e fontes do Notion (paleta e fontes escolhidas de propósito, nunca o padrão do Bootstrap), escolhida pelo Murilo entre três opções.
+- Espaçamento na escala de 4 e 8 (raiz de 16 px, corpo de 17 px) e 16 px de respiro nas células das tabelas. Motivo: a primeira versão tinha 8,5 px nas células, texto colado na borda da caixa e valores como 6,4 e 12,8 px fora da escala do Notion.
+- Sem semáforo: status em texto neutro, sucesso sem cor, só o erro colorido. Motivo: regra "Nada de semáforo" do Notion; antes havia etiquetas verdes e vermelhas em cada linha.
+- Sem ícone decorativo: ficam só os botões que são só ícone (ver, editar, excluir, buscar, salvar status), todos com nome acessível que cita o item. Motivo: regra de Interface do Notion (Boas práticas, seção 3).
+- Contraste mínimo de 4,5:1 e área de clique de 40 px em todos os botões e campos. Motivo: o detector do impeccable achou os botões de contorno do Bootstrap em 4,3:1, e o seletor de status tinha 32 px.
+- Texto longo sem espaço (e-mail, código) quebra em vez de estourar a tela; colunas curtas (RA, datas, vagas) e cabeçalhos não quebram. Motivo: teste com dados extremos (nome de 120 caracteres, e-mail de 200 sem espaço, emoji, 1 milhão de vagas) estourava 560 px em 320 px.
 - Tabelas largas viram região com foco por teclado (`tabindex="0"`, `role="region"` e `aria-label`) e mostram sombra na borda que ainda tem conteúdo. Motivo: em 320 px a rolagem lateral passava despercebida.
 
 ## 9. Cuidados

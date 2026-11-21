@@ -12,6 +12,19 @@ document.querySelectorAll('form[data-confirmar]').forEach(f =>
     })
 );
 </script>
+<script>
+// Enquanto salva, o botão fica bloqueado contra clique duplo
+document.querySelectorAll('form').forEach(f =>
+    f.addEventListener('submit', e => {
+        if (e.defaultPrevented) return;
+        const b = f.querySelector('button:not([type=button])');
+        if (!b) return;
+        const texto = b.textContent.trim();
+        setTimeout(() => { b.disabled = true; if (texto) b.textContent = 'Salvando...'; }, 0);
+        window.addEventListener('pageshow', () => { b.disabled = false; if (texto) b.textContent = texto; }, { once: true });
+    })
+);
+</script>
 <?php $primeiroErro = camposInvalidos()[0] ?? null; ?>
 <?php if ($primeiroErro): ?>
 <script>document.getElementById(<?= json_encode($primeiroErro) ?>)?.focus();</script>

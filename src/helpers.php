@@ -92,7 +92,7 @@ function exigirConfirmacao(string $mensagem, string $cancelar): void
         <?php endforeach; ?>
         <input type="hidden" name="confirmado" value="1">
         <div class="d-flex gap-2">
-            <button class="btn btn-danger"><i class="bi bi-trash"></i> Excluir</button>
+            <button class="btn btn-danger">Excluir</button>
             <a href="<?= url($cancelar) ?>" class="btn btn-outline-secondary">Cancelar</a>
         </div>
     </form>
@@ -145,6 +145,15 @@ function formatarData(mixed $data, string $formato = 'd/m/Y'): string
         return $dt->format($formato);
     }
     return '';
+}
+
+/** Percentual de vagas ocupadas (0 a 100), para a régua do curso. Com pelo menos uma matrícula, nunca menos que 2%. */
+function percentualOcupacao(int $ocupadas, int $vagas): int
+{
+    if ($ocupadas <= 0 || $vagas <= 0) {
+        return 0;
+    }
+    return max(2, min(100, (int) round($ocupadas / $vagas * 100)));
 }
 
 function agora(): UTCDateTime

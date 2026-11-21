@@ -32,14 +32,14 @@ require __DIR__ . '/../../templates/header.php';
 ?>
 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
     <div>
-        <a href="<?= url('cursos/index.php') ?>" class="small text-decoration-none"><i class="bi bi-arrow-left"></i> Cursos</a>
+        <a href="<?= url('cursos/index.php') ?>" class="text-decoration-none">Cursos</a>
         <h1 class="h3 mb-0"><?= h($c['nome']) ?> <small class="text-body-secondary fs-6"><?= h($c['codigo']) ?></small></h1>
     </div>
     <div class="d-flex gap-2">
-        <a href="<?= url('cursos/form.php?id=' . $id) ?>" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
+        <a href="<?= url('cursos/form.php?id=' . $id) ?>" class="btn btn-outline-primary">Editar</a>
         <form method="post" action="<?= url('cursos/excluir.php') ?>" data-confirmar="Excluir este curso e todas as matrículas nele?">
             <input type="hidden" name="id" value="<?= $id ?>">
-            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
+            <button class="btn btn-outline-danger">Excluir</button>
         </form>
     </div>
 </div>
@@ -56,7 +56,9 @@ require __DIR__ . '/../../templates/header.php';
                     <dt class="col-5">Turno</dt><dd class="col-7"><?= h($c['turno']) ?></dd>
                     <dt class="col-5">Carga horária</dt><dd class="col-7"><?= (int) $c['carga_horaria'] ?> horas</dd>
                     <dt class="col-5">Vagas</dt>
-                    <dd class="col-7"><?= $ativas ?> de <?= (int) $c['vagas'] ?> ocupadas</dd>
+                    <dd class="col-7"><?= $ativas ?> de <?= (int) $c['vagas'] ?> ocupadas
+                        <span class="regua regua-ficha" style="--ocupacao: <?= percentualOcupacao($ativas, (int) $c['vagas']) ?>%" aria-hidden="true"></span>
+                    </dd>
                 </dl>
             </div>
         </div>
@@ -77,11 +79,11 @@ require __DIR__ . '/../../templates/header.php';
                             <option value="<?= $e['_id'] ?>"><?= h($e['ra'] . ' · ' . $e['nome']) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button class="btn btn-success"><i class="bi bi-plus-lg"></i> Matricular</button>
+                    <button class="btn btn-principal">Matricular</button>
                 </div>
             </form>
             <?php elseif (!$temVaga): ?>
-                <div class="card-body border-bottom text-danger small"><i class="bi bi-exclamation-circle"></i> Curso lotado.</div>
+                <div class="card-body border-bottom fw-semibold">Curso lotado.</div>
             <?php endif; ?>
 
             <?php if (!$matriculas): ?>
@@ -95,15 +97,15 @@ require __DIR__ . '/../../templates/header.php';
                         <tr>
                             <td>
                                 <a href="<?= url('estudantes/ver.php?id=' . $m['estudante']['_id']) ?>"><?= h($m['estudante']['nome']) ?></a>
-                                <div class="small text-body-secondary">RA <?= h($m['estudante']['ra']) ?></div>
+                                <div class="text-body-secondary">RA <?= h($m['estudante']['ra']) ?></div>
                             </td>
-                            <td><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
+                            <td class="text-nowrap"><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
                             <td><?php include __DIR__ . '/../../templates/status-matricula.php'; ?></td>
                             <td class="text-end">
-                                <form method="post" action="<?= url('matriculas/excluir.php') ?>" data-confirmar="Excluir esta matrícula?">
+                                <form method="post" action="<?= url('matriculas/excluir.php') ?>" data-confirmar="Excluir a matrícula de <?= h($m['estudante']['nome']) ?>?">
                                     <input type="hidden" name="id" value="<?= $m['_id'] ?>">
                                     <input type="hidden" name="voltar" value="curso">
-                                    <button class="btn btn-sm btn-outline-danger" title="Excluir matrícula" aria-label="Excluir matrícula"><i class="bi bi-x-lg"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Excluir matrícula" aria-label="Excluir matrícula de <?= h($m['estudante']['nome']) ?>"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                 </form>
                             </td>
                         </tr>

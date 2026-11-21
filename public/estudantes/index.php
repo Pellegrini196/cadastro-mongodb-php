@@ -32,40 +32,48 @@ require __DIR__ . '/../../templates/header.php';
 ?>
 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
     <h1 class="h3 mb-0">Estudantes</h1>
-    <a href="<?= url('estudantes/form.php') ?>" class="btn btn-success"><i class="bi bi-plus-lg"></i> Cadastrar estudante</a>
+    <a href="<?= url('estudantes/form.php') ?>" class="btn btn-principal">Cadastrar estudante</a>
 </div>
 
 <form class="mb-3" method="get">
     <div class="input-group">
         <input type="search" name="q" aria-label="Buscar" value="<?= h($busca) ?>" class="form-control" placeholder="Nome, RA, CPF, e-mail ou cidade">
-        <button class="btn btn-outline-secondary" aria-label="Buscar"><i class="bi bi-search"></i></button>
+        <button class="btn btn-outline-secondary" aria-label="Buscar"><i class="bi bi-search" aria-hidden="true"></i></button>
     </div>
 </form>
 
 <div class="card">
 <?php if (!$estudantes): ?>
-    <div class="card-body text-body-secondary"><?= $busca === '' ? 'Nenhum estudante cadastrado.' : 'Nenhum resultado para “' . h($busca) . '”.' ?></div>
+    <div class="card-body">
+        <?php if ($busca === ''): ?>
+            <p class="mb-3">Nenhum estudante cadastrado ainda.</p>
+            <a href="<?= url('estudantes/form.php') ?>" class="btn btn-principal">Cadastrar estudante</a>
+        <?php else: ?>
+            <p class="mb-3">Nenhum resultado para “<?= h($busca) ?>”.</p>
+            <a href="<?= url('estudantes/index.php') ?>" class="btn btn-outline-secondary">Limpar busca</a>
+        <?php endif; ?>
+    </div>
 <?php else: ?>
     <div class="table-responsive" tabindex="0" role="region" aria-label="Lista de estudantes">
         <table class="table table-hover mb-0">
             <thead>
-            <tr><th>RA</th><th>Nome</th><th>E-mail</th><th>Cidade/UF</th><th class="text-center">Cursos</th><th class="text-end">Ações</th></tr>
+            <tr><th>RA</th><th>Nome</th><th>E-mail</th><th>Cidade/UF</th><th class="text-end">Cursos</th><th class="text-end">Ações</th></tr>
             </thead>
             <tbody>
             <?php foreach ($estudantes as $e): ?>
                 <tr>
-                    <td><?= h($e['ra']) ?></td>
+                    <td class="text-nowrap"><?= h($e['ra']) ?></td>
                     <td><a href="<?= url('estudantes/ver.php?id=' . $e['_id']) ?>"><?= h($e['nome']) ?></a></td>
                     <td><?= h($e['email']) ?></td>
                     <td><?= h(($e['endereco']['cidade'] ?? '') . '/' . ($e['endereco']['uf'] ?? '')) ?></td>
-                    <td class="text-center"><span class="badge text-bg-success"><?= $e['total_cursos'] ?></span></td>
+                    <td class="text-end"><?= $e['total_cursos'] ?></td>
                     <td class="text-end text-nowrap">
-                        <a class="btn btn-sm btn-outline-secondary" href="<?= url('estudantes/ver.php?id=' . $e['_id']) ?>" title="Ver"><i class="bi bi-eye"></i></a>
-                        <a class="btn btn-sm btn-outline-primary" href="<?= url('estudantes/form.php?id=' . $e['_id']) ?>" title="Editar"><i class="bi bi-pencil"></i></a>
+                        <a class="btn btn-sm btn-outline-secondary" href="<?= url('estudantes/ver.php?id=' . $e['_id']) ?>" title="Ver" aria-label="Ver <?= h($e['nome']) ?>"><i class="bi bi-eye" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm btn-outline-primary" href="<?= url('estudantes/form.php?id=' . $e['_id']) ?>" title="Editar" aria-label="Editar <?= h($e['nome']) ?>"><i class="bi bi-pencil" aria-hidden="true"></i></a>
                         <form class="d-inline" method="post" action="<?= url('estudantes/excluir.php') ?>"
                               data-confirmar="Excluir <?= h($e['nome']) ?> e todas as suas matrículas?">
                             <input type="hidden" name="id" value="<?= $e['_id'] ?>">
-                            <button class="btn btn-sm btn-outline-danger" title="Excluir" aria-label="Excluir"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Excluir" aria-label="Excluir <?= h($e['nome']) ?>"><i class="bi bi-trash" aria-hidden="true"></i></button>
                         </form>
                     </td>
                 </tr>

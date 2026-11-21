@@ -31,14 +31,14 @@ require __DIR__ . '/../../templates/header.php';
 ?>
 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
     <div>
-        <a href="<?= url('estudantes/index.php') ?>" class="small text-decoration-none"><i class="bi bi-arrow-left"></i> Estudantes</a>
+        <a href="<?= url('estudantes/index.php') ?>" class="text-decoration-none">Estudantes</a>
         <h1 class="h3 mb-0"><?= h($e['nome']) ?></h1>
     </div>
     <div class="d-flex gap-2">
-        <a href="<?= url('estudantes/form.php?id=' . $id) ?>" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
+        <a href="<?= url('estudantes/form.php?id=' . $id) ?>" class="btn btn-outline-primary">Editar</a>
         <form method="post" action="<?= url('estudantes/excluir.php') ?>" data-confirmar="Excluir este estudante e todas as suas matrículas?">
             <input type="hidden" name="id" value="<?= $id ?>">
-            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
+            <button class="btn btn-outline-danger">Excluir</button>
         </form>
     </div>
 </div>
@@ -81,7 +81,7 @@ require __DIR__ . '/../../templates/header.php';
                             <option value="<?= $c['_id'] ?>"><?= h($c['codigo'] . ' · ' . $c['nome']) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button class="btn btn-success"><i class="bi bi-plus-lg"></i> Matricular</button>
+                    <button class="btn btn-principal">Matricular</button>
                 </div>
             </form>
             <?php endif; ?>
@@ -97,15 +97,15 @@ require __DIR__ . '/../../templates/header.php';
                         <tr>
                             <td>
                                 <a href="<?= url('cursos/ver.php?id=' . $m['curso']['_id']) ?>"><?= h($m['curso']['nome']) ?></a>
-                                <div class="small text-body-secondary"><?= h($m['curso']['codigo']) ?></div>
+                                <div class="text-body-secondary"><?= h($m['curso']['codigo']) ?></div>
                             </td>
-                            <td><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
+                            <td class="text-nowrap"><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
                             <td><?php include __DIR__ . '/../../templates/status-matricula.php'; ?></td>
                             <td class="text-end">
-                                <form method="post" action="<?= url('matriculas/excluir.php') ?>" data-confirmar="Excluir esta matrícula?">
+                                <form method="post" action="<?= url('matriculas/excluir.php') ?>" data-confirmar="Excluir a matrícula em <?= h($m['curso']['nome']) ?>?">
                                     <input type="hidden" name="id" value="<?= $m['_id'] ?>">
                                     <input type="hidden" name="voltar" value="estudante">
-                                    <button class="btn btn-sm btn-outline-danger" title="Excluir matrícula" aria-label="Excluir matrícula"><i class="bi bi-x-lg"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Excluir matrícula" aria-label="Excluir matrícula em <?= h($m['curso']['nome']) ?>"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                 </form>
                             </td>
                         </tr>

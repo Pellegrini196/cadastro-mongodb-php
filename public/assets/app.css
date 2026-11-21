@@ -1,43 +1,162 @@
-/* Tema claro suave: fundos acinzentados, nunca branco puro. Fonte acima do padrão. */
+/* Identidade "Institucional e calma" (DESIGN.md): esquema análogo, petróleo e verde-azulado.
+   Cores e fontes das telas vêm só dos tokens abaixo. OKLCH no comentário, hex no valor. */
 :root {
-    --bs-body-bg: #e8ebef;
-    --bs-tertiary-bg: #e8ebef;
-    --bs-body-color: #1f2933;
-    --bs-secondary-color: #4b5563;
-    --bs-border-color: #cdd3da;
-    --app-superficie: #f4f5f7;
-    --app-barra: #dfe3e8;
-    --bs-link-color: #0a58ca;
-    --bs-link-color-rgb: 10, 88, 202;
-    --bs-link-hover-color: #084298;
-    --bs-link-hover-color-rgb: 8, 66, 152;
+    /* Neutros puxados para o petróleo (60%) */
+    --fundo: #E4EDEE;           /* oklch(0.94 0.010 205) */
+    --superficie: #F0F7F7;      /* oklch(0.97 0.007 205) */
+    --campo: #F7FBFB;           /* oklch(0.985 0.004 205) */
+    --barra: #D7E4E6;           /* oklch(0.91 0.014 205) */
+    --borda: #C5D0D1;           /* oklch(0.85 0.012 205), estrutura */
+    --borda-campo: #6E7E82;     /* oklch(0.58 0.020 215), controles, 3,9:1 */
+    --linha-hover: #DEE9EA;     /* oklch(0.925 0.012 205) */
+    --regua-fundo: #CFDADB;     /* oklch(0.88 0.012 205) */
+    --texto: #102227;           /* oklch(0.24 0.025 215) */
+    --texto-suave: #3E5156;     /* oklch(0.42 0.025 215) */
+    --selecao: #AFD9EA;         /* oklch(0.86 0.050 225) */
+    /* Cor principal (30%) */
+    --primaria: #005C76;        /* oklch(0.44 0.085 225) */
+    --primaria-hover: #00485F;  /* oklch(0.37 0.080 225) */
+    /* Destaque (10%): só o botão principal */
+    --destaque: #006955;        /* oklch(0.46 0.095 175) */
+    --destaque-hover: #005342;  /* oklch(0.39 0.085 175) */
+    --sobre-destaque: #FAFCFC;  /* oklch(0.99 0.003 175) */
+    /* Erro: só erro de formulário, ação destrutiva e falha de conexão */
+    --erro: #A12F2F;            /* oklch(0.48 0.150 25) */
+    --erro-hover: #7F2021;      /* oklch(0.40 0.130 25) */
+    --erro-fundo: #FFE4E1;      /* oklch(0.94 0.030 25) */
+
+    /* Fontes: Sora nos títulos, Source Sans 3 no corpo */
+    --fonte-titulo: "Sora", "Segoe UI", system-ui, sans-serif;
+    --fonte-corpo: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    /* Escala modular de razão 1,25 sobre o corpo de 17 px (raiz em 16 px, para os espaços do Bootstrap
+       saírem na escala 4, 8, 16, 24, 48) */
+    --fs-0: 1.0625rem;          /* 17 px */
+    --fs-1: 1.328rem;           /* 21 px */
+    --fs-2: 1.66rem;            /* 27 px */
+
+    /* O Bootstrap lê os tokens */
+    --bs-body-bg: var(--fundo);
+    --bs-tertiary-bg: var(--fundo);
+    --bs-body-color: var(--texto);
+    --bs-body-font-family: var(--fonte-corpo);
+    --bs-emphasis-color: var(--texto);
+    --bs-heading-color: var(--texto);
+    --bs-secondary-color: var(--texto-suave);
+    --bs-border-color: var(--borda);
+    --bs-link-color: var(--primaria);
+    --bs-link-color-rgb: 0, 92, 118;
+    --bs-link-hover-color: var(--primaria-hover);
+    --bs-link-hover-color-rgb: 0, 72, 95;
+    --bs-danger-rgb: 161, 47, 47;
+    --bs-focus-ring-color: color-mix(in srgb, var(--primaria) 30%, transparent);
+    --bs-form-invalid-border-color: var(--erro);
 }
-html { font-size: 106.25%; } /* 17px com o padrão de 16px, respeitando a fonte escolhida no navegador */
-body { background: var(--bs-body-bg); }
-.table td, .badge { font-variant-numeric: tabular-nums; }
-.app-nav { background: var(--app-barra); }
+
+html {
+    font-size: 100%;             /* respeita a fonte escolhida no navegador; o corpo de 17 px vem de --fs-0 */
+    color-scheme: light;
+    accent-color: var(--primaria);
+    scrollbar-color: var(--borda-campo) var(--fundo);
+}
+body { background: var(--fundo); font-size: var(--fs-0); line-height: 1.5; }
+.navbar-brand { font-size: var(--fs-1); }
+h1, h2, h3, .h3, .h5, .card-header, .navbar-brand { font-family: var(--fonte-titulo); font-weight: 600; letter-spacing: -0.01em; }
+h1, h2, h3, .h3 { line-height: 1.2; text-wrap: balance; }
+h1, .h3 { font-size: var(--fs-2); }
+.card-header { font-size: var(--fs-0); line-height: 1.2; }
+p { text-wrap: pretty; }
+.table td, .table th { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--primaria); outline-offset: 2px; }
+::selection { background: var(--selecao); color: var(--texto); }
+input, textarea, select { caret-color: var(--primaria); }
+
+/* Barra de navegação */
+.app-nav {
+    background: var(--barra);
+    border-bottom-color: var(--borda) !important;
+    --bs-navbar-color: var(--texto-suave);
+    --bs-navbar-hover-color: var(--primaria);
+    --bs-navbar-active-color: var(--primaria);
+    --bs-navbar-brand-color: var(--texto);
+    --bs-navbar-brand-hover-color: var(--primaria);
+    --bs-navbar-toggler-border-color: var(--borda-campo);
+}
 .app-nav .nav-link.active { font-weight: 600; }
-.card, .list-group-item, .table { --bs-card-bg: var(--app-superficie); --bs-list-group-bg: var(--app-superficie); --bs-table-bg: var(--app-superficie); }
-.card { border: 1px solid var(--bs-border-color); box-shadow: none; }
-.table > :not(caption) > * > * { vertical-align: middle; }
+
+/* Cartões, listas e tabelas */
+.card, .list-group-item, .table {
+    --bs-card-bg: var(--superficie);
+    --bs-list-group-bg: var(--superficie);
+    --bs-list-group-border-color: var(--borda);
+    --bs-table-bg: var(--superficie);
+    --bs-table-color: var(--texto);
+    --bs-table-border-color: var(--borda);
+    --bs-table-hover-bg: var(--linha-hover);
+    --bs-table-hover-color: var(--texto);
+}
+.card { border: 1px solid var(--borda); box-shadow: none; }
+/* Respiro das células: 16 px dos lados, igual ao título e ao corpo do cartão, para o texto não colar na borda.
+   Linhas de 40 a 48 px; a linha com botões de 40 px usa 4 px em cima e embaixo (48 px no total). */
+.table > :not(caption) > * > * { vertical-align: middle; padding: 8px 16px; }
+.table > :not(caption) > * > td:has(.btn-sm) { padding-block: 4px; }
+.table th { white-space: nowrap; color: var(--texto-suave); font-weight: 600; }
+@media (hover: hover) { .list-group-item-action:hover { background: var(--linha-hover); } }
+
 /* Tabela que rola para o lado em tela estreita: sombra na borda que ainda tem conteúdo escondido.
    As duas faixas "local" acompanham a rolagem e tapam a sombra quando não há mais nada para ver. */
 .table-responsive .table { --bs-table-bg: transparent; }
 .table-responsive {
     background:
-        linear-gradient(to right, var(--app-superficie), var(--app-superficie)) left center / 24px 100% no-repeat local,
-        linear-gradient(to left, var(--app-superficie), var(--app-superficie)) right center / 24px 100% no-repeat local,
-        radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / .25), transparent) left center / 14px 100% no-repeat scroll,
-        radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / .25), transparent) right center / 14px 100% no-repeat scroll,
-        var(--app-superficie);
+        linear-gradient(to right, var(--superficie), var(--superficie)) left center / 24px 100% no-repeat local,
+        linear-gradient(to left, var(--superficie), var(--superficie)) right center / 24px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--texto) 25%, transparent), transparent) left center / 16px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--texto) 25%, transparent), transparent) right center / 16px 100% no-repeat scroll,
+        var(--superficie);
 }
-.form-control, .form-select { background-color: #fafbfc; }
-/* Campo com erro de validação: borda vermelha forte, além da mensagem no topo */
-.form-control[aria-invalid="true"], .form-select[aria-invalid="true"] {
-    border-color: #b02a37;
-    box-shadow: 0 0 0 1px #b02a37;
-}
+
+/* Assinatura: a ocupação do curso é uma régua fina, no lugar de etiqueta colorida */
+.regua { display: block; width: 96px; height: 8px; margin-top: 4px; border-radius: 999px; background: var(--regua-fundo); position: relative; overflow: hidden; }
+.regua::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--ocupacao, 0%); background: var(--primaria); border-radius: inherit; }
+.regua-ficha { width: 100%; max-width: 192px; }
+
+/* Campos */
+.form-control, .form-select { background-color: var(--campo); border-color: var(--borda-campo); color: var(--texto); }
+.form-control::placeholder { color: var(--texto-suave); opacity: .85; }
+.form-control:focus, .form-select:focus { border-color: var(--primaria); background-color: var(--campo); color: var(--texto); }
+.form-control[aria-invalid="true"], .form-select[aria-invalid="true"] { border-color: var(--erro); box-shadow: 0 0 0 1px var(--erro); }
 .form-label { font-weight: 500; }
-fieldset legend { font-size: 1.05rem; font-weight: 600; }
-:focus-visible { outline: 3px solid #1d6f5a; outline-offset: 2px; }
-::selection { background: #b7dccf; color: #11261f; }
+fieldset legend { font-family: var(--fonte-titulo); font-size: var(--fs-0); font-weight: 600; }
+
+/* Botões: o principal usa o destaque; os de contorno usam a cor principal, a neutra e o erro */
+.btn { transition: color .15s, background-color .15s, border-color .15s, box-shadow .15s, transform .15s; }
+.btn:active { transform: scale(.97); }
+.btn-principal { --bs-btn-color: var(--sobre-destaque); --bs-btn-bg: var(--destaque); --bs-btn-border-color: var(--destaque); --bs-btn-hover-color: var(--sobre-destaque); --bs-btn-hover-bg: var(--destaque-hover); --bs-btn-hover-border-color: var(--destaque-hover); --bs-btn-active-color: var(--sobre-destaque); --bs-btn-active-bg: var(--destaque-hover); --bs-btn-active-border-color: var(--destaque-hover); --bs-btn-disabled-bg: var(--destaque); --bs-btn-disabled-border-color: var(--destaque); }
+.btn-danger { --bs-btn-color: var(--sobre-destaque); --bs-btn-bg: var(--erro); --bs-btn-border-color: var(--erro); --bs-btn-hover-color: var(--sobre-destaque); --bs-btn-hover-bg: var(--erro-hover); --bs-btn-hover-border-color: var(--erro-hover); --bs-btn-active-bg: var(--erro-hover); --bs-btn-active-border-color: var(--erro-hover); }
+.btn-outline-primary { --bs-btn-color: var(--primaria); --bs-btn-border-color: var(--primaria); --bs-btn-hover-color: var(--sobre-destaque); --bs-btn-hover-bg: var(--primaria); --bs-btn-hover-border-color: var(--primaria); --bs-btn-active-color: var(--sobre-destaque); --bs-btn-active-bg: var(--primaria-hover); --bs-btn-active-border-color: var(--primaria-hover); }
+.btn-outline-secondary { --bs-btn-color: var(--texto-suave); --bs-btn-border-color: var(--borda-campo); --bs-btn-hover-color: var(--sobre-destaque); --bs-btn-hover-bg: var(--texto-suave); --bs-btn-hover-border-color: var(--texto-suave); --bs-btn-active-color: var(--sobre-destaque); --bs-btn-active-bg: var(--texto); --bs-btn-active-border-color: var(--texto); --bs-btn-disabled-color: var(--texto-suave); --bs-btn-disabled-border-color: var(--borda-campo); }
+.btn-outline-danger { --bs-btn-color: var(--erro); --bs-btn-border-color: var(--erro); --bs-btn-hover-color: var(--sobre-destaque); --bs-btn-hover-bg: var(--erro); --bs-btn-hover-border-color: var(--erro); --bs-btn-active-color: var(--sobre-destaque); --bs-btn-active-bg: var(--erro-hover); --bs-btn-active-border-color: var(--erro-hover); }
+.text-danger { color: var(--erro) !important; }
+
+/* Área de clique de pelo menos 40 px */
+.btn-sm { --bs-btn-padding-y: .5rem; --bs-btn-padding-x: .75rem; min-width: 2.5rem; min-height: 2.5rem; }
+.btn, .form-control, .form-select, .navbar-toggler { min-height: 2.5rem; }
+
+/* Espaços internos na escala de 4 e 8 (o Bootstrap usa 6 e 12 em alguns) e fonte do corpo nos controles */
+.btn { --bs-btn-font-size: var(--fs-0); }
+.btn:not(.btn-sm) { --bs-btn-padding-y: .5rem; --bs-btn-padding-x: 1rem; }
+.form-control, .form-select { padding-block: .5rem; font-size: var(--fs-0); }
+.form-select { padding-right: 2.5rem; }
+.app-nav { --bs-navbar-brand-padding-y: .25rem; }
+
+/* Avisos: sucesso e atenção são neutros, só o erro usa cor */
+.alert-danger { --bs-alert-bg: var(--erro-fundo); --bs-alert-color: var(--erro-hover); --bs-alert-border-color: var(--erro); --bs-alert-link-color: var(--erro-hover); }
+.app-aviso { background: var(--superficie); border: 1px solid var(--borda); color: var(--texto); }
+.app-aviso .alert-link { color: inherit; }
+
+/* Texto longo sem espaço (e-mail, código) quebra em vez de estourar a tela ou forçar rolagem */
+.table td, h1, h2, .card-body, .list-group-item, .alert, dt, dd { overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .btn:active { transform: none; }
+}

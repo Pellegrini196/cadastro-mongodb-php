@@ -30,18 +30,18 @@ require __DIR__ . '/../templates/header.php';
     <div class="alert alert-danger">
         <strong>Não foi possível conectar ao MongoDB.</strong><br>
         Confira o arquivo <code>.env</code> (MONGODB_URI) e se o servidor está rodando.<br>
-        <small class="text-body-secondary"><?= h($erroConexao) ?></small>
+        <span class="text-body-secondary"><?= h($erroConexao) ?></span>
     </div>
 <?php else: ?>
 <div class="list-group mb-4">
     <a href="<?= url('estudantes/index.php') ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-        Estudantes <span class="badge text-bg-success rounded-pill"><?= $totalEstudantes ?></span>
+        Estudantes <span class="fw-semibold"><?= $totalEstudantes ?></span>
     </a>
     <a href="<?= url('cursos/index.php') ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-        Cursos <span class="badge text-bg-success rounded-pill"><?= $totalCursos ?></span>
+        Cursos <span class="fw-semibold"><?= $totalCursos ?></span>
     </a>
     <div class="list-group-item d-flex justify-content-between align-items-center">
-        Matrículas ativas <span class="badge text-bg-success rounded-pill"><?= $totalMatriculas ?></span>
+        Matrículas ativas <span class="fw-semibold"><?= $totalMatriculas ?></span>
     </div>
 </div>
 
@@ -58,8 +58,8 @@ require __DIR__ . '/../templates/header.php';
                 <tr>
                     <td><a href="<?= url('estudantes/ver.php?id=' . $m['estudante']['_id']) ?>"><?= h($m['estudante']['nome']) ?></a></td>
                     <td><a href="<?= url('cursos/ver.php?id=' . $m['curso']['_id']) ?>"><?= h($m['curso']['nome']) ?></a></td>
-                    <td><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
-                    <td><?= h($m['status']) ?></td>
+                    <td class="text-nowrap"><?= formatarData($m['data_matricula'], 'd/m/Y H:i') ?></td>
+                    <td class="text-nowrap"><?= h($m['status']) ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

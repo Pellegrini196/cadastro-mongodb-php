@@ -15,7 +15,9 @@ if (!$m) {
 $origem = ($_POST['voltar'] ?? '') === 'curso'
     ? 'cursos/ver.php?id=' . $m['curso_id']
     : 'estudantes/ver.php?id=' . $m['estudante_id'];
-exigirConfirmacao('Excluir esta matrícula?', $origem);
+$estudante = db()->estudantes->findOne(['_id' => $m['estudante_id']]);
+$curso     = db()->cursos->findOne(['_id' => $m['curso_id']]);
+exigirConfirmacao('Excluir a matrícula de ' . ($estudante['nome'] ?? 'estudante removido') . ' em ' . ($curso['nome'] ?? 'curso removido') . '?', $origem);
 
 db()->matriculas->deleteOne(['_id' => $id]);
 
