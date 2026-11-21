@@ -1,0 +1,12 @@
+# Opcional: sobe um MongoDB local em segundos (precisa do Docker instalado)
+#   docker compose up -d
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo-faculdade
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-dados:/data/db
+volumes:
+  mongo-dados:
