@@ -1,6 +1,6 @@
 <?php
 /** @var string $titulo */
-$titulo = $titulo ?? 'Cadastro Acadêmico';
+$titulo = $titulo ?? 'Matriculum';
 $atual  = $_SERVER['SCRIPT_NAME'] ?? '';
 $ativo  = fn(string $parte) => str_contains($atual, $parte) ? 'active' : '';
 ?>
@@ -9,7 +9,11 @@ $ativo  = fn(string $parte) => str_contains($atual, $parte) ? 'active' : '';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= h($titulo) ?> · Cadastro Acadêmico</title>
+    <title><?= h($titulo) ?> · Matriculum</title>
+    <link rel="icon" href="<?= url('assets/favicon.svg') ?>" type="image/svg+xml">
+    <link rel="icon" href="<?= url('assets/favicon.ico') ?>" sizes="48x48">
+    <link rel="apple-touch-icon" href="<?= url('assets/apple-touch-icon.png') ?>">
+    <meta name="theme-color" content="#D7E4E6">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -20,8 +24,9 @@ $ativo  = fn(string $parte) => str_contains($atual, $parte) ? 'active' : '';
 <body>
 <nav class="navbar navbar-expand-md app-nav border-bottom mb-4">
     <div class="container">
-        <a class="navbar-brand fw-semibold text-body" href="<?= url('index.php') ?>">
-            Cadastro Acadêmico
+        <a class="navbar-brand fw-semibold text-body d-flex align-items-center gap-2" href="<?= url('index.php') ?>">
+            <img src="<?= url('assets/logo.svg') ?>" alt="" width="34" height="32">
+            Matriculum
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
                 aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">

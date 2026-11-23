@@ -1,6 +1,10 @@
-# Cadastro Acadêmico: identidade visual
+# Matriculum: identidade visual
 
 Escolhida pelo Murilo em 21/11/2026, entre três opções (A institucional e calma, B técnica e precisa, C acolhedora e acadêmica). Regras de origem: Notion, Preferências › Interface (Cores e fontes, Vícios de IA e assinatura, Formulários, Tabelas e listas).
+
+## Nome
+
+Matriculum, escolhido pelo Murilo em 21/11/2026 entre quatro opções (Matriculum, Registrum, Studium e Academicum). Junta matrícula e curriculum, liga ao que o sistema faz (matricular estudantes em cursos) e soa institucional, no tom da identidade. O repositório e a pasta mantêm o nome antigo, `cadastro-mongodb-php`.
 
 ## Personalidade
 
@@ -78,6 +82,16 @@ Origem do ajuste: a primeira versão usava raiz de 17 px, o que dava 8,5 px nas 
 ## Assinatura
 
 **A ocupação do curso é uma régua fina**, em `primaria`, no lugar da etiqueta colorida. Na lista de cursos aparece abaixo de "2/25"; na ficha do curso, abaixo de "2 de 25 ocupadas". Régua cheia e a palavra "lotado" em peso 600 quando não há vaga. Mesmo gesto nos dois lugares, sem cor extra.
+
+## Logotipo e favicon
+
+O logotipo é o gerado no Gemini em 21/11/2026, a pedido do Murilo: um capelo de formatura com borla sobre um livro aberto, em petróleo (`primaria`), com a faixa e a borla em verde-azulado (`destaque`). Foi **vetorizado**, ou seja, redesenhado em curvas a partir do desenho original, com as cores dos tokens e cantos vivos, em `public/assets/logo.svg` (2,4 KB, fundo transparente). O JPG do Gemini (2048 px, fundo claro e cor manchada pela compressão) não entra no projeto.
+
+Onde aparece: no cabeçalho, ao lado do nome Matriculum, com 32 px de altura e 8 px de espaço, com `alt` vazio porque o nome ao lado já descreve o link.
+
+Favicon: o mesmo logotipo sobre um quadrado de cantos arredondados em `superficie`, com fio em `borda`, ocupando 75% do quadrado (`public/assets/favicon.svg`). Arquivos em `public/assets/`: `favicon.svg` (principal), `favicon.ico` (16, 32 e 48 px, para navegadores antigos e o pedido automático de `/favicon.ico`) e `apple-touch-icon.png` (180 px, quadrado inteiro, para o atalho no iPhone). Ligados no `templates/header.php`, com `theme-color` na cor da barra (`barra`).
+
+Limite conhecido: em 16 px os detalhes do livro viram mancha e o favicon fica uma silhueta de capelo sobre livro; em 32 px o desenho aparece inteiro. Aceito de propósito para manter o desenho igual ao do Gemini.
 
 ## Decisões conscientes
 

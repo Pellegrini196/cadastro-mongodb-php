@@ -1,6 +1,6 @@
-# Cadastro acadêmico com PHP e MongoDB
+# Matriculum
 
-Atividade 3 de Desenvolvimento de Aplicações para WEB I. O sistema cadastra estudantes e cursos em PHP e grava no MongoDB, local ou Atlas. Um estudante pode estar em vários cursos e um curso pode ter vários estudantes. A interface usa Bootstrap 5.
+Cadastro de estudantes e cursos com PHP e MongoDB, feito na Atividade 3 de Desenvolvimento de Aplicações para WEB I. O sistema grava no MongoDB, local ou Atlas. Um estudante pode estar em vários cursos e um curso pode ter vários estudantes. A interface usa Bootstrap 5.
 
 Autor: Murilo Machado dos Santos Pellegrini (trabalho individual).
 
